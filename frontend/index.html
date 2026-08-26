@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>College Event Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>College Event Management System</h1>
+
+    <!-- USER INFORMATION -->
+
+    <div id="userInfo">
+        Checking login...
+    </div>
+
+
+    <!-- LOGIN / LOGOUT -->
+
+    <div>
+
+        <a id="loginLink" href="login.html">
+            Login
+        </a>
+
+        <button
+            id="logoutButton"
+            style="display: none;"
+        >
+            Logout
+        </button>
+
+    </div>
+
+
+    <hr>
+
+
+    <!-- EVENTS -->
+
+    <h2>Events</h2>
+
+    <button onclick="getEvents()">
+        View Events
+    </button>
+
+    <button
+        id="myRegistrationsButton"
+        style="display: none;"
+        onclick="getMyRegistrations()"
+    >
+        My Registrations
+    </button>
+
+    <div id="events"></div>
+
+
+    <!-- ========================= -->
+    <!-- ADMIN PANEL -->
+    <!-- ========================= -->
+
+    <div
+        id="adminSection"
+        style="display: none;"
+    >
+
+        <hr>
+
+        <h2>Admin Panel</h2>
+
+
+        <!-- ADD -->
+
+        <button onclick="showAddEventForm()">
+            Add Event
+        </button>
+
+
+        <!-- EDIT -->
+
+        <button onclick="showEditEventForm()">
+            Edit Event
+        </button>
+
+
+        <!-- DELETE -->
+
+        <button onclick="showDeleteEventForm()">
+            Delete Event
+        </button>
+
+
+        <!-- VIEW REGISTRATIONS -->
+
+        <button onclick="showRegistrationsForm()">
+            View Registrations
+        </button>
+
+
+        <!-- ========================= -->
+        <!-- ADD EVENT FORM -->
+        <!-- ========================= -->
+
+        <div
+            id="addEventForm"
+            style="display: none;"
+        >
+
+            <h3>Add New Event</h3>
+
+            <form id="eventForm">
+
+                <label>Event Name:</label>
+                <br>
+
+                <input
+                    type="text"
+                    id="eventName"
+                    required
+                >
+
+                <br><br>
+
+                <label>Event Date:</label>
+                <br>
+
+                <input
+                    type="date"
+                    id="eventDate"
+                    required
+                >
+
+                <br><br>
+
+                <label>Venue:</label>
+                <br>
+
+                <input
+                    type="text"
+                    id="eventVenue"
+                    required
+                >
+
+                <br><br>
+
+                <button type="submit">
+                    Add Event
+                </button>
+
+                <button
+                    type="button"
+                    onclick="hideAddEventForm()"
+                >
+                    Cancel
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- EDIT EVENT FORM -->
+        <!-- ========================= -->
+
+        <div
+            id="editEventForm"
+            style="display: none;"
+        >
+
+            <h3>Edit Event</h3>
+
+            <form id="editForm">
+
+                <label>Event ID:</label>
+                <br>
+
+                <input
+                    type="number"
+                    id="editEventId"
+                    required
+                >
+
+                <br><br>
+
+                <button
+                    type="button"
+                    onclick="loadEventForEdit()"
+                >
+                    Get Event
+                </button>
+
+                <br><br>
+
+                <div
+                    id="editDetails"
+                    style="display: none;"
+                >
+
+                    <label>Event Name:</label>
+                    <br>
+
+                    <input
+                        type="text"
+                        id="editEventName"
+                        required
+                    >
+
+                    <br><br>
+
+                    <label>Event Date:</label>
+                    <br>
+
+                    <input
+                        type="date"
+                        id="editEventDate"
+                        required
+                    >
+
+                    <br><br>
+
+                    <label>Venue:</label>
+                    <br>
+
+                    <input
+                        type="text"
+                        id="editEventVenue"
+                        required
+                    >
+
+                    <br><br>
+
+                    <button type="submit">
+                        Update Event
+                    </button>
+
+                </div>
+
+                <button
+                    type="button"
+                    onclick="hideEditEventForm()"
+                >
+                    Cancel
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- DELETE EVENT FORM -->
+        <!-- ========================= -->
+
+        <div
+            id="deleteEventForm"
+            style="display: none;"
+        >
+
+            <h3>Delete Event</h3>
+
+            <form id="deleteForm">
+
+                <label>Event ID:</label>
+                <br>
+
+                <input
+                    type="number"
+                    id="deleteEventId"
+                    required
+                >
+
+                <br><br>
+
+                <button
+                    type="button"
+                    onclick="loadEventForDelete()"
+                >
+                    Get Event
+                </button>
+
+                <br><br>
+
+
+                <!-- Event details appear here -->
+
+                <div
+                    id="deleteDetails"
+                    style="display: none;"
+                >
+
+                    <h4>Event Details</h4>
+
+                    <p>
+                        ID:
+                        <span id="deleteId"></span>
+                    </p>
+
+                    <p>
+                        Name:
+                        <span id="deleteName"></span>
+                    </p>
+
+                    <p>
+                        Date:
+                        <span id="deleteDate"></span>
+                    </p>
+
+                    <p>
+                        Venue:
+                        <span id="deleteVenue"></span>
+                    </p>
+
+
+                    <button
+                        type="submit"
+                    >
+                        Confirm Delete
+                    </button>
+
+                </div>
+
+                <button
+                    type="button"
+                    onclick="hideDeleteEventForm()"
+                >
+                    Cancel
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- VIEW REGISTRATIONS FORM -->
+        <!-- ========================= -->
+
+        <div
+            id="registrationsForm"
+            style="display: none;"
+        >
+
+            <h3>View Event Registrations</h3>
+
+            <form
+                id="registrationsFormElement"
+            >
+
+                <label>Event ID:</label>
+                <br>
+
+                <input
+                    type="number"
+                    id="registrationEventId"
+                    required
+                >
+
+                <br><br>
+
+                <button type="submit">
+                    View Registrations
+                </button>
+
+                <button
+                    type="button"
+                    onclick="hideRegistrationsForm()"
+                >
+                    Cancel
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

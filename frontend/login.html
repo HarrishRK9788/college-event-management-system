@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - College Event Management System</title>
+
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <h1>
+            College Event Management System
+        </h1>
+
+        <div class="auth-card">
+
+            <h2>Welcome Back</h2>
+
+            <form id="loginForm">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    minlength="3"
+                    maxlength="30"
+                    required
+                >
+
+                <small id="usernameError"></small>
+
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    minlength="6"
+                    required
+                >
+
+                <small id="passwordError"></small>
+
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <div id="message"></div>
+
+            <a href="register.html">
+                Don't have an account? Register
+            </a>
+
+        </div>
+
+    </div>
+
+    <script src="login.js"></script>
+
+</body>
+
+</html>

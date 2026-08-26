@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register - College Event Management System</title>
+
+    <link rel="stylesheet" href="auth.css">
+
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <h1>
+            College Event Management System
+        </h1>
+
+
+        <div class="auth-card">
+
+            <h2>Create Account</h2>
+
+
+            <form id="registerForm">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose a username"
+                    minlength="3"
+                    maxlength="30"
+                    pattern="[A-Za-z0-9_]+"
+                    required
+                >
+
+                <small id="usernameError"></small>
+
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    minlength="6"
+                    maxlength="100"
+                    required
+                >
+
+                <small id="passwordError"></small>
+
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Enter password again"
+                    required
+                >
+
+                <small id="confirmPasswordError"></small>
+
+
+                <label for="role">
+                    Account Type
+                </label>
+
+                <select
+                    id="role"
+                    name="role"
+                    required
+                >
+
+                    <option value="student">
+                        Student
+                    </option>
+
+                    <option value="admin">
+                        Admin
+                    </option>
+
+                </select>
+
+
+                <button type="submit">
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <div id="message"></div>
+
+
+            <a href="login.html">
+                Already have an account? Login
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <script src="register.js"></script>
+
+</body>
+
+</html>
