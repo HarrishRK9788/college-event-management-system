@@ -61,17 +61,30 @@ CORS(
 # =========================================================
 
 def get_db_connection():
+    ca_path = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..",
+            "certs",
+            "ca.pem"
+        )
+    )
+
     return mysql.connector.connect(
         host=os.environ.get("DB_HOST", "mysql"),
         port=int(os.environ.get("DB_PORT", "3306")),
         user=os.environ.get("DB_USER", "root"),
         password=os.environ.get("DB_PASSWORD", "2468"),
         database=os.environ.get("DB_NAME", "college_event_db"),
+
+        # TiDB TLS
+        use_pure=True,
+        ssl_ca=ca_path,
         ssl_verify_cert=True,
         ssl_verify_identity=True,
+
         connection_timeout=10
     )
-
 
 # =========================================================
 # CHECK ADMIN
