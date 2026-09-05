@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, session
+from flask import Flask, jsonify, request, session, send_from_directory
 from flask_cors import CORS
 import mysql.connector
 import re
@@ -9,14 +9,32 @@ from werkzeug.security import (
 )
 
 
+FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend")
+
 app = Flask(__name__)
+
+
+# =========================================================
+# FRONTEND
+# =========================================================
+
+@app.route("/")
+def serve_index():
+    return send_from_directory(FRONTEND_DIR, "index.html")
+
+
+@app.route("/<path:filename>")
+def serve_frontend(filename):
+    if filename.startswith("api/"):
+        return jsonify({"message": "Not found"}), 404
+    return send_from_directory(FRONTEND_DIR, filename)
 
 
 # =========================================================
 # SESSION
 # =========================================================
 
-app.secret_key = "college-event-secret-key"
+app.secret_key = os.environ.get("SECRET_KEY", "college-event-secret-key")
 
 
 # =========================================================
@@ -25,7 +43,7 @@ app.secret_key = "college-event-secret-key"
 
 CORS(
     app,
-    origins=["http://127.0.0.1:5500"],
+    origins="*",
     supports_credentials=True
 )
 
@@ -37,11 +55,11 @@ CORS(
 def get_db_connection():
 
     return mysql.connector.connect(
-        host="mysql",
-        port=3306,
-        user="root",
-        password="2468",
-        database="college_event_db"
+        host=os.environ.get("DB_HOST", "mysql"),
+        port=int(os.environ.get("DB_PORT", 3306)),
+        user=os.environ.get("DB_USER", "root"),
+        password=os.environ.get("DB_PASSWORD", "2468"),
+        database=os.environ.get("DB_NAME", "college_event_db")
     )
 
 
