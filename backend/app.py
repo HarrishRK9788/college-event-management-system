@@ -46,13 +46,14 @@ CORS(
 # =========================================================
 
 def get_db_connection():
-
     return mysql.connector.connect(
         host=os.environ.get("DB_HOST", "mysql"),
         port=int(os.environ.get("DB_PORT", "3306")),
         user=os.environ.get("DB_USER", "root"),
         password=os.environ.get("DB_PASSWORD", "2468"),
         database=os.environ.get("DB_NAME", "college_event_db"),
+        ssl_verify_cert=True,
+        ssl_verify_identity=True,
         connection_timeout=10
     )
 
