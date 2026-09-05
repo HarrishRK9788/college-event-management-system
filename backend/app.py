@@ -3,19 +3,34 @@ from flask_cors import CORS
 import mysql.connector
 import re
 import os
-from werkzeug.security import (
-    generate_password_hash,
-    check_password_hash
-)
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
-# =========================================================
-# SESSION
-# =========================================================
+# Create Flask application
+app = Flask(__name__)
 
+# Secret key for sessions
 app.secret_key = os.environ.get(
     "SECRET_KEY",
     "college-event-secret-key"
+)
+
+# Session security
+if os.environ.get("VERCEL") == "1":
+    app.config["SESSION_COOKIE_SECURE"] = True
+
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+
+
+# CORS for local development
+CORS(
+    app,
+    origins=[
+        "http://127.0.0.1:5500",
+        "http://localhost:5500"
+    ],
+    supports_credentials=True
 )
 
 # Secure session settings for production.
