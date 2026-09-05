@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, session
 from flask_cors import CORS
 import mysql.connector
 import re
-
+import os
 from werkzeug.security import (
     generate_password_hash,
     check_password_hash
@@ -37,7 +37,7 @@ CORS(
 def get_db_connection():
 
     return mysql.connector.connect(
-        host="127.0.0.1",
+        host="mysql",
         port=3306,
         user="root",
         password="2468",
@@ -1233,5 +1233,5 @@ def cancel_registration(event_id):
 # =========================================================
 
 if __name__ == "__main__":
-
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)

@@ -7,7 +7,7 @@ async function checkLogin() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/api/me",
+            "/api/me",
             {
                 method: "GET",
                 credentials: "include"
@@ -121,7 +121,7 @@ async function logout() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/api/logout",
+            "/api/logout",
             {
                 method: "POST",
                 credentials: "include"
@@ -168,7 +168,7 @@ async function getEvents() {
 
         const userResponse =
             await fetch(
-                "http://127.0.0.1:5000/api/me",
+                "/api/me",
                 {
                     credentials: "include"
                 }
@@ -188,7 +188,7 @@ async function getEvents() {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/api/events"
+                "/api/events"
             );
 
 
@@ -325,7 +325,7 @@ document
 
                 const response =
                     await fetch(
-                        "http://127.0.0.1:5000/api/events",
+                        "/api/events",
                         {
                             method: "POST",
 
@@ -439,7 +439,7 @@ async function loadEventForEdit() {
 
         const response =
             await fetch(
-                `http://127.0.0.1:5000/api/events/${id}`
+                `/api/events/${id}`
             );
 
 
@@ -525,7 +525,7 @@ document
 
                 const response =
                     await fetch(
-                        `http://127.0.0.1:5000/api/events/${id}`,
+                        `/api/events/${id}`,
                         {
                             method: "PUT",
 
@@ -641,7 +641,7 @@ async function loadEventForDelete() {
 
         const response =
             await fetch(
-                `http://127.0.0.1:5000/api/events/${id}`
+                `/api/events/${id}`
             );
 
 
@@ -734,7 +734,7 @@ document
 
                 const response =
                     await fetch(
-                        `http://127.0.0.1:5000/api/events/${id}`,
+                        `/api/events/${id}`,
                         {
                             method: "DELETE",
                             credentials: "include"
@@ -830,7 +830,7 @@ document
 
                 const response =
                     await fetch(
-                        `http://127.0.0.1:5000/api/events/${eventId}/registrations`,
+                        `/api/events/${eventId}/registrations`,
                         {
                             method: "GET",
                             credentials: "include"
@@ -962,7 +962,7 @@ async function registerForEvent(eventId) {
 
         const response =
             await fetch(
-                `http://127.0.0.1:5000/api/events/${eventId}/register`,
+                `/api/events/${eventId}/register`,
                 {
                     method: "POST",
                     credentials: "include"
@@ -1014,7 +1014,7 @@ async function getMyRegistrations() {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/api/my-registrations",
+                "/api/my-registrations",
                 {
                     method: "GET",
                     credentials: "include"
@@ -1140,7 +1140,7 @@ async function cancelRegistration(eventId) {
 
         const response =
             await fetch(
-                `http://127.0.0.1:5000/api/events/${eventId}/register`,
+                `/api/events/${eventId}/register`,
                 {
                     method: "DELETE",
                     credentials: "include"
